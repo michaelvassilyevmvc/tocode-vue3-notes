@@ -12,15 +12,44 @@ export default {
   components: {Form, List},
   data() {
     return {
-      notes: ['task1', 'task2', 'task3',]
+      notes: [{
+        title: 'Learn Vue 3',
+        tags: ['work']
+      },
+        {
+          title: 'Finish course',
+          tags: ['work', 'home']
+        }
+      ]
+    }
+  },
+  mounted() {
+    this.getNotes();
+  },
+  watch: {
+    notes: {
+      handler(updatedList) {
+        localStorage.setItem('notes', JSON.stringify(updatedList))
+      },
+      deep: true,
     }
   },
   methods: {
-    handleSubmit(note) {
+    handleSubmit(title) {
+      const note = {
+        title: title,
+        tags: []
+      };
       this.notes.push(note);
     },
     handleRemove(index) {
       this.notes.splice(index, 1);
+    },
+    getNotes() {
+      const localNotes = localStorage.getItem('notes');
+      if (localNotes) {
+        this.notes = JSON.parse(localNotes);
+      }
     }
   }
 }
