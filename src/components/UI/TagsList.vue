@@ -18,6 +18,10 @@ export default {
       type: Array,
       required: true
     },
+    isActive: {
+      type: Boolean,
+      default: false
+    },
     isPreview: {
       type: Boolean,
       default: false
@@ -40,6 +44,12 @@ export default {
   background-color: #fff;
   border-radius: 22px;
   user-select: none;
+  cursor: pointer;
+
+  &.isActive {
+    background-color: #444ce0;
+    color: #fff;
+  }
 
   &.isPreview {
     padding: 0;
