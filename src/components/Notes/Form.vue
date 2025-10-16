@@ -2,11 +2,10 @@
   <div class="note-form__wrapper">
     <form class="note-form" @submit.prevent="onSubmit">
     <textarea
-
       required
       v-model="value"
       placeholder="Type ur note"/>
-      <TagsList @onItemClick="handleTagClick" :items="tags"/>
+      <TagsList @onItemClick="handleTagClick" :items="tags" :selectedTags="selectedTags"/>
       <button class="btn btnPrimary" type="submit">Add new note</button>
 
     </form>
@@ -21,16 +20,22 @@ export default {
   data() {
     return {
       value: '',
-      tags: ['home', 'work', 'travel']
+      tags: ['home', 'work', 'travel'],
+      selectedTags:[]
     }
   },
   methods: {
     onSubmit() {
-      this.$emit('onSubmit', this.value);
+      this.$emit('onSubmit', this.value, this.selectedTags);
       this.value = '';
+      this.selectedTags = [];
     },
     handleTagClick(tag) {
-      console.log(tag);
+      if (this.selectedTags.includes(tag)) {
+        this.selectedTags = this.selectedTags.filter(tag => tag !== tag);
+      } else {
+        this.selectedTags.push(tag);
+      }
     }
   }
 }

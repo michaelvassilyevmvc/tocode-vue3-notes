@@ -35,10 +35,10 @@ export default {
     }
   },
   methods: {
-    handleSubmit(title) {
+    handleSubmit(title, tags) {
       const note = {
         title: title,
-        tags: []
+        tags: tags
       };
       this.notes.push(note);
     },

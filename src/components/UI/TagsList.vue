@@ -3,8 +3,8 @@
     <div class="tag-item"
          v-for="(item) in items"
          :key="item"
-         @click="$emit('onItemClick',item)"
-         :class="{isPreview:isPreview}"
+         @click="$emit('onItemClick', item)"
+         :class="[{ isPreview }, { isActive: this.selectedTags.includes(item) }]"
     >
       <span>{{ item }}</span>
     </div>
@@ -18,9 +18,9 @@ export default {
       type: Array,
       required: true
     },
-    isActive: {
-      type: Boolean,
-      default: false
+    selectedTags: {
+      type: Array,
+      default: () => []
     },
     isPreview: {
       type: Boolean,
