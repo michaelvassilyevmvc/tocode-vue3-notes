@@ -20,12 +20,8 @@ export default {
   },
   methods: {
     onSubmit() {
-      const name = 'evgenii';
-      const age = 24;
-
-      this.$emit('test', {name, age});
-      // this.$emit('onSubmit', this.value);
-      // this.value = '';
+      this.$emit('onSubmit', this.value);
+      this.value = '';
     }
   }
 }
